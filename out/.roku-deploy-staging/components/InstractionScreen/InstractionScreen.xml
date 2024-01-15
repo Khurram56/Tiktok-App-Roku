@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "utf-8" ?> 
+<component name = "InstractionScreen" extends = "Group" initialFocus="InstractionScreen">
+  <script type="text/brightscript" uri="InstractionScreen.brs" />
+  <children>
+      <Label 
+        id="title"
+        text="How To Use"
+        font="font:LargeSystemFont"
+        translation="[550, 110]"
+      />
+
+      <!-- Scrollable text -->
+      <ScrollableText 
+        id = "instructions"
+        translation = "[ 120, 194 ]"
+        font = "font:MediumSystemFont"
+        text=""
+        horizAlign = "left" 
+        vertAlign = "top"
+        width="1100"
+        height="800"
+      />
+  </children>
+</component>

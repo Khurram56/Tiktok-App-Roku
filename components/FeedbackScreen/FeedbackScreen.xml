@@ -1,0 +1,41 @@
+<?xml version = "1.0" encoding = "utf-8" ?> 
+<component name = "FeedbackScreen" extends = "Group" initialFocus="backBtn">
+  <interface>
+    <field id="goBackBtn" alwaysnotify="true" alias="backBtn.buttonSelected" />
+  </interface>
+  <script type="text/brightscript" uri="FeedbackScreen.brs" />
+  <children >
+    <Group>
+
+      <Label 
+        id="title"
+        text="Scan QR code to share your thoughts with us."
+        font="font:LargeBoldSystemFont"
+        translation="[330, 60]"
+      />
+
+      <!-- Poster for a image in centered -->
+      <Poster
+        id="poster"
+        width="500"
+        height="500"
+        translation="[420, 120]"
+        uri="pkg:/images/qrcode.png"
+      />
+
+      <!-- Button to go to video screen -->
+      <Button
+        id="backBtn"
+        text="Return to videos"
+        translation="[555, 645]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        opacity="1.0"
+      />
+        
+    </Group>
+
+  </children>
+
+</component>

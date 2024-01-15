@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component name="PreferencesRowListItem" extends="Group" >
+    <interface>
+      <field id="itemContent" type="node" onChange="OnContentSet" />
+    </interface>
+    <script type="text/brightscript" uri="PreferencesRowListItem.brs" />
+    <children>
+
+        <ScrollingLabel 
+            id = "title" 
+            maxWidth = "140" 
+            height = "40"
+            horizAlign = "center"
+            vertAlign = "center"
+            font = "font:MediumBoldSystemFont" 
+            text=""
+            
+        />
+
+    </children>
+</component>
