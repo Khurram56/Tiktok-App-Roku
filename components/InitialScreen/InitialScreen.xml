@@ -86,9 +86,10 @@
       showFocusFootprint="true"
       iconUri="pkg:/images/feed_back.png"
       focusedIconUri="pkg:/images/feed_back.png"
-      translation="[1170, 20]"  
-      maxwidth="85"
+      translation="[1170, 10]"  
+      maxwidth="90"
       minWidth="85"
+      height="70"
     />
 
       <Button

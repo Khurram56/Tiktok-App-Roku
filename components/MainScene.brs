@@ -1,6 +1,6 @@
 sub init()
-    RegDelete("defaltPreferences")
-    RegDelete("defaltSavedVideo")
+    ' RegDelete("defaltPreferences")
+    ' RegDelete("defaltSavedVideo")
     InitScreenStack()
     m.currentDate = 0
     m.top.backgroundURI = ""
@@ -81,14 +81,16 @@ function defaltPreferences()
     object5 = {}
     object1.name = "Trending"
     favourites.push(object1)
+    object4.name = "ForYou"
+    favourites.push(object4)
     object.name = "Top"
     favourites.push(object)
     object2.name = "Comedy"
     favourites.push(object2)
     object3.name = "Animation"
     favourites.push(object3)
-    object4.name = "ForYou"
-    favourites.push(object4)
+    object5.name = "Gaming"
+    favourites.push(object5)
     file = WriteAsciiFile("tmp:/prefer.txt", formatJson(favourites))
     print ReadAsciiFile("tmp:/prefer.txt")
     RegWrite("defaltPreferences", FormatJson(favourites))

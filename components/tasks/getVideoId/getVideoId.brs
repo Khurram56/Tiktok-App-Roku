@@ -39,7 +39,8 @@ sub getContent()
     print "Url: " url
     xfer.SetURL(url)
     xfer.AddHeader("X-RapidAPI-Host", "tiktok-scraper7.p.rapidapi.com")
-    xfer.AddHeader("X-RapidAPI-Key", "486a89c811msh54ba0256b830a5ap13199cjsndf2db2fc4aa2")
+    xfer.AddHeader("X-RapidAPI-Key", "5d5f123215mshe2de294047c807ep14997ejsnae4da76a4c07")
+    'xfer.AddHeader("X-RapidAPI-Key", "486a89c811msh54ba0256b830a5ap13199cjsndf2db2fc4aa2")
     xfer.InitClientCertificates()
     rsp = xfer.GetToString()
     print "rsp: " rsp
