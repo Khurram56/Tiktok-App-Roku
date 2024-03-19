@@ -1,6 +1,12 @@
 sub init()
+
+   m.title = m.top.findNode("tittle")
+   m.poster = m.top.findNode("poster")
+   m.backBtn = m.top.findNode("backBtn")
+   m.top.setFocus(true)
+
    print "In Init of SupportScreen"
-   RegWrite("supportScreen", "true")
+   'RegWrite("supportScreen", "true")
 end sub
 
 function RegRead(key, section = invalid)
@@ -27,4 +33,14 @@ function RegWrite(key, val, section = invalid)
    sec = CreateObject("roRegistrySection", section)
    sec.Write(key, val)
    sec.Flush() 'commit it
+end function
+
+function onKeyEvent(key as string, press as boolean) as boolean
+   handled = false
+   if press
+       if key = "down"
+           m.backBtn.setFocus(true)
+       end if
+   end if
+   return handled
 end function

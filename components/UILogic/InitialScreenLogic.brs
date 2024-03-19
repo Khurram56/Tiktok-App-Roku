@@ -1,8 +1,19 @@
 sub ShowInitialScreen()
+    print " initial screen "
     m.initialScreen = CreateObject("roSGNode", "InitialScreen")
-    m.initialScreen.ObserveField("optionButtonSelected","ShowFeedBackScreen")
+    m.initialScreen.ObserveField("optionButtonSelected","ShowRateUsScreen")
+    m.initialScreen.ObserveField("subscribeButtonSelected","ShowSubscriptionScreen")
+    m.initialScreen.ObserveField("subscription_expired", "subscriptionScreenMenu")
     m.posterSplash.visible = "false"
     ShowScreen(m.initialScreen) 
+end sub
+
+sub ShowF_BScreen()
+    print "here is ShowF_BScreen "
+    m.feedbackscreeen = CreateObject("roSGNode", "RateUsScreen")
+    m.feedbackscreeen.ObserveField("settingsButtonSelected","feedBackScreen1")
+    m.posterSplash.visible = "false"
+    ShowScreen(m.feedbackscreeen) 
 end sub
 
 sub handleOptions()
@@ -14,7 +25,14 @@ sub handleOptions()
     m.top.getScene().dialog = dialog
 end sub
 
-
+sub handleFeedBack()
+    print "Handle feedback"
+    dialog = createObject("roSGNode", "Dialog")
+    dialog.title = "Feedback"
+    dialog.buttons = ["How To Use", "Feedback","Subscription"]
+    dialog.ObserveField("buttonSelected", "onFeedbackButtonSelected")
+    m.top.getScene().dialog = dialog
+end sub
 
 sub onOptionsButtonSelected(event as object)
     index = event.GetData()
@@ -27,7 +45,25 @@ sub onOptionsButtonSelected(event as object)
         ShowEditPreferencesScreen()
     else if index = 1
         print "Feedback"
-        ShowFeedBackScreen()
+        ShowRateUsScreen()
+    else if index = 2
+        'show  products
+        m.initialScreen.subscriptionDialog = "changed"
+    end if
+end sub
+
+sub onFeedbackButtonSelected(event as object)
+    index = event.GetData()
+    if m.top.dialog <> invalid
+        m.top.dialog.close = false
+    end if
+    ' print "Button Index: " event.GetData()
+    if index = 0
+        print "How to Use"
+        ShowEditPreferencesScreen()
+    else if index = 1
+        print "Feedback"
+        feedBackScreen1()
     else if index = 2
         'show  products
         m.initialScreen.subscriptionDialog = "changed"
@@ -41,26 +77,34 @@ sub ShowEditPreferencesScreen()
     ShowScreen(m.showEditPreferencesScreen)
 end sub
 
-sub ShowFeedBackScreen()
+sub ShowRateUsScreen()
+    m.feedBackScreen = CreateObject("roSGNode", "RateUsScreen")
+    m.feedBackScreen.ObserveField("settingsButtonSelected","feedBackScreen1")
+    m.feedBackScreen.ObserveField("ctg_ButtonSelected","subscriptionScreenMenu")
+
+    ShowScreen(m.feedBackScreen)
+
+end sub
+
+sub ShowSubscriptionScreen()
+    m.subscriptionScreen = CreateObject("roSGNode", "subscription")
+    ShowScreen(m.subscriptionScreen)
+
+end sub
+
+sub feedBackScreen1()
+    m.busyspinner.visible = false
     m.feedBackScreen = CreateObject("roSGNode", "FeedbackScreen")
     m.feedBackScreen.ObserveField("goBackBtn", "GoBack")
     ShowScreen(m.feedBackScreen)
+    print "here i ma in feedback"
 end sub
 
-' sub PlayVideoButtonPressed()
-'     if m.initialScreen.signal = "ok"
-'         'print  "In playing video"
-'         m.screen = "videoscreen"
-'         m.videoPlayer = CreateObject("roSGNode", "VideoScreen")
-'         ShowScreen(m.videoPlayer) ' show video player screen
-'     end if
-' end sub
+sub subscriptionScreenMenu()
+    print " subscriptionScreenMenu called trough UI logic"
+    m.subscriptionScreen = CreateObject("roSGNode", "subscription")
+    ShowScreen(m.subscriptionScreen)
+end sub
 
-' sub PlayVideo()
-'     if m.source = "ok"
-'         'print  "In playing video"
-'         m.screen = "videoscreen"
-'         m.videoPlayer = CreateObject("roSGNode", "VideoScreen")
-'         ShowScreen(m.videoPlayer) ' show video player screen
-'     end if
-' end sub
+
+

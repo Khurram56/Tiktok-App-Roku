@@ -7,8 +7,9 @@
   <script type="text/brightscript" uri="UILogic/InitialScreenLogic.brs" />
   <script type="text/brightscript" uri="UILogic/ScreenStackLogic.brs" />
   <interface>
-<field id="offline" type="boolean" value="false" alwaysNotify="true" onChange="onOfflineChanged"/>
-</interface>
+        <field id="offline" type="boolean" value="false" alwaysNotify="true" onChange="onOfflineChanged"/>
+        <field id="appExit" type="bool" alwaysnotify="true" value="false"/>
+  </interface>
 
   <children >
 
@@ -21,7 +22,7 @@
 
        <Poster
       id="posterSplash"
-      uri="pkg:/images/splash.jpg"
+      uri="pkg:/images/SplashScreen.png"
       width="1280"
       height="720"
       translation="[0,0]"

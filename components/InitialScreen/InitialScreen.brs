@@ -1,29 +1,39 @@
 sub init()
-    'print  "Called init"
-    'print  "Called regwrite"
-
     m.preferencesArr = []
     m.preferencestext = ""
     m.writeText = ""
     m.i = 0
-    m.query = "Trending"
+    
+    'm.query = "Animations"
+    m.query = "ForYou"
     m.checkOnItemClicked = false
     m.checkOnAddButtonClicked = false
-
+    m.poster_homescreen = m.top.findNode("poster_homescreen")
+    
     m.searchQuery = m.top.findNode("searchQuery")
     m.butonUp = m.top.findNode("butonUp")
-    m.option = m.top.findNode("option")
+    m.ForYouFixed_btn = m.top.findNode("ForYouFixed_btn")
+    
+
+    m.posterRow = m.top.findNode("posterRow") 
+    m.subscribe = m.top.findNode("subscribe")
+    m.settings = m.top.findNode("settings")
     m.butonDown = m.top.findNode("butonDown")
     m.searchQuery.visible = false
     m.rowList = m.top.findNode("rowList")
-    m.rowList.setFocus(true)
+    m.rowList.setFocus(false)
     m.video = m.top.findNode("musicvideos")
     m.top.ObserveField("visible", "OnVisibleChange")
     m.rowList.ObserveField("rowItemSelected", "OnItemClicked")
+
+    m.ForYouFixed_btn.observeField("buttonSelected", "ForYouFixed_btnClicked")
     m.butonUp.observeField("buttonSelected", "moveVideoUp")
     m.butonDown.observeField("buttonSelected", "moveVideoDown")
-    m.option.observeField("buttonSelected", "OptionButtonClicked")
-
+    m.settings.observeField("buttonSelected", "OptionButtonClicked")
+    m.subscribe.observeField("buttonSelected", "subscribeButtonClicked")
+  
+    m.video.SetFocus(true)
+    m.video.control="resume"
     getCategoriesTask()
     apiRequestSpinner()
     videosRendered()
@@ -31,36 +41,37 @@ sub init()
 end sub
 
 sub AddPreferencesButtonClicked()
-
-    if (m.video.control = "play") or (m.video.control = "resume")
-        m.video.control = "pause"
-    end if
     m.checkOnAddButtonClicked = true 'when add preferences button press set true
     CheckSubscriptionAndStartPlayback()
 end sub
 
-''Loading Spinner
 sub getBusySpinner()
     m.busyspinner = m.top.findNode("busySpinner")
     m.busyspinner.poster.observeField("loadStatus", "showspinner")
     m.busyspinner.poster.uri = "pkg:/images/flickr.png"
-    'm.busyspinner.control = "start"
 end sub
+
 sub showspinner()
     m.checkSpinner = "empty"
     if(m.busyspinner.poster.loadStatus = "ready")
         centerx = (1280 - m.busyspinner.poster.bitmapWidth) / 2
         centery = (720 - m.busyspinner.poster.bitmapWidth) / 2
         m.busyspinner.translation = [centerx, centery]
-        m.busyspinner.visible = true
+        m.busyspinner.visible = false
         m.checkSpinner = "loaded"
     end if
 end sub
 
 sub OptionButtonClicked()
-    if m.video.control = "play" or m.video.control = "resume"
-        m.video.control = "pause"
-    end if
+    print "settings button clicked"
+    m.video.control = "pause"
+    'm.video.SetFocus(false)
+end sub
+
+sub subscribeButtonClicked()
+    print "subscribed butoon clicked"
+    'm.video.SetFocus(false)
+    m.video.control = "pause"
 end sub
 
 sub apiRequestSpinner()
@@ -69,6 +80,7 @@ sub apiRequestSpinner()
     m.exampleBusyspinner.poster.uri = "pkg:/images/busyspinner_hd.png"
     'm.busyspinner.control = "start"
 end sub
+
 sub showSearchSpinner()
     m.checkBusySpinner = "empty"
     if(m.exampleBusyspinner.poster.loadStatus = "ready")
@@ -117,8 +129,7 @@ sub reloadButtonSelected(event as object)
     index = event.GetData()
     if m.top.getScene().dialog <> invalid
         m.top.getScene().dialog.close = true
-    end if
-    ' print "Button Index: " event.GetData()
+    end if ' print "Button Index: " event.GetData()
     if index = 0
         print "reload Aggain"
         fetchVideos()
@@ -128,64 +139,107 @@ end sub
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
     if press
-        if key = "left" and m.option.hasFocus()
+        if key = "left" and m.settings.hasFocus()
             m.rowList.setFocus(true)
+        else if key = "left" and m.rowList.hasFocus()
+            m.ForYouFixed_btn.setFocus(true)
         else if key = "right" and m.rowList.hasFocus()
-            m.option.setFocus(true)
-
-        else if key = "down" and m.rowList.hasFocus() or m.option.hasFocus()
+            m.settings.setFocus(true)
+        else if key = "right" and m.ForYouFixed_btn.hasFocus()
+            m.rowList.setFocus(true)
+        else if key = "left" and m.ForYouFixed_btn.hasFocus()
+            m.subscribe.setFocus(true)
+        else if key = "down" and m.ForYouFixed_btn.hasFocus()
+            m.butonUp.setFocus(true)
+        else if key = "right" and m.subscribe.hasFocus()
+            m.ForYouFixed_btn.setFocus(true)
+        else if key = "down" and m.rowList.hasFocus() or m.subscribe.hasFocus()
             m.video.setFocus(true)
-            m.rowList.visible = false
-            m.searchQuery.visible = true
-
+            m.rowList.visible = true
+            m.butonUp.SetFocus(true)
+            'm.searchQuery.visible = true
+        else if key = "down" and m.settings.hasFocus()
+            m.butonDown.SetFocus(true)
+        else if key = "up" and m.butonDown.hasFocus()
+            m.settings.SetFocus(true)
         else if key = "down" and m.video.hasFocus() and not m.butonUp.hasFocus()
             m.butonUp.setFocus(true)
-
         else if key = "down" and m.butonUp.hasFocus() and not m.butonDown.hasFocus()
             m.butonDown.setFocus(true)
-
         else if key = "up" and not m.butonDown.hasFocus()
             m.rowList.visible = true
-            m.rowList.setFocus(true)
+            m.subscribe.setFocus(true)
             m.searchQuery.visible = false
-
         else if key = "up" and m.butonDown.hasFocus()
             m.butonUp.SetFocus(true)
-
-        else if key = "OK" and m.video.hasFocus()
-            if m.video.control = "play" or m.video.control = "resume"
-                m.video.control = "pause"
-
-            else if m.video.control = "pause"
-                m.video.control = "resume"
+        else if key = "play"
+            if m.video.control="resume"
+                m.video.control="pause"
+            else if m.video.control="pause"
+                m.video.control="resume"
             end if
-
-
         else if key = "right" and (m.video.hasFocus() or m.butonUp.hasFocus() or m.butonDown.hasFocus())
             m.butonDown.setFocus(true)
-            if m.i = m.videos.Count() - 1
-                m.butonDown.visible = false
+            getDailyFactoryUpdate2()
+            m.a = RegRead("count_videos")
+            if m.a <> invalid
+                print "valid "
+                m.a = m.a.toInt()
             else
+                print "Registry value not found or is invalid"
+                m.a = 0
+            end if
+            if m.a < 10
                 m.video.content = invalid
+                print " Number of Videos Played :::"m.a
                 'play next video
-                m.i = m.i + 1
-                playVideo(m.i)
+                m.a =m.a + 1
+                RegWrite("count_videos", FormatJson(m.a))
+                playVideo(m.a)
+            else
+                print " Number of Videos Played :"m.a
+                CheckSubscriptionAndStartPlayback()
+                if m.a <=500
+                    m.a = m.a+ 1
+                    RegWrite("count_videos", FormatJson(m.a))
+                    playVideo(m.a)
+                else 
+                    print "limit reached"
+                    DailyVideosLimitReachedDialog()
+                end if
+                m.butonDown.visible = true
             end if
             if(m.butonUp.visible = false)
                 m.butonUp.visible = true
             end if
-
         else if key = "left" and (m.video.hasFocus() or m.butonDown.hasFocus() or m.butonUp.hasFocus())
             m.butonUp.setFocus(true)
-            'play next video
-            if(m.i = 0)
-                m.butonUp.visible = false
+            getDailyFactoryUpdate2()
+            m.a = RegRead("count_videos")
+            if m.a <> invalid
+                print "valid "
+                m.a = m.a.toInt()
             else
-                m.video.content = invalid
-                m.i = m.i - 1
-                playVideo(m.i)
+                print "Registry value not found or is invalid"
+                m.a = 0
             end if
-            if(m.butonDown.visible = false)
+            if m.a <= 10
+                m.video.content = invalid
+                print " Number of Videos Played :::"m.a
+                m.a =m.a - 1
+                RegWrite("count_videos", FormatJson(m.a))
+                playVideo(m.a)
+            else
+                print " Number of Videos Played :"m.a
+                CheckSubscriptionAndStartPlayback()
+                if m.a <= 14
+                    m.a = m.a - 1
+                    RegWrite("count_videos", FormatJson(m.a))
+                    playVideo(m.a)
+                else 
+                    print "limit reached"
+                    DailyVideosLimitReachedDialog()
+                end if
                 m.butonDown.visible = true
             end if
         end if
@@ -193,9 +247,35 @@ function onKeyEvent(key as string, press as boolean) as boolean
     return handled
 end function
 
+sub DailyVideosLimitReachedDialog()
+    m.video.control="pause"
+    dialog = createObject("roSGNode", "StandardMessageDialog")
+    dialog.title = "Daily Limit Reached"
+    dialog.message = ["You have reached the Daily Limit, Come Tomorrow!"]
+    dialog.buttons = ["Cancel"]
+    dialog.observeFieldScoped("buttonSelected", "DailyLimtDialogButtonSelected1")
+    m.greenPalette = createObject("roSGNode", "RSGPalette")
+    m.greenPalette.colors = {DialogBackgroundColor: "0x3d3c3c",
+                            DialogFocusColor: "0xFF004F",
+                            DialogFocusItemColor: "0xddddddff",
+                            DialogFootprintColor: "0xddddddff" }
+    m.top.getScene().palette = m.greenPalette
+    m.top.getScene().dialog = dialog
+end sub
+
+sub DailyLimtDialogButtonSelected1(event as object)
+    button = event.getData()
+    if m.top.getScene().dialog <> invalid
+        m.top.getScene().dialog.close = true
+    end if
+    if button = 0
+        m.top.getScene().dialog.close = true
+    end if
+end sub
+
 sub moveVideoUp()
     if(m.i = 0)
-        m.butonUp.visible = false
+        m.butonUp.visible = true
         m.butonDown.SetFocus(true)
     else
         m.video.content = invalid
@@ -209,7 +289,7 @@ end sub
 
 sub moveVideoDown()
     if m.i = m.videos.Count() - 1
-        m.butonDown.visible = false
+        m.butonDown.visible = true
         m.butonUp.SetFocus(true)
     else
         m.video.content = invalid
@@ -245,8 +325,6 @@ function RegWrite(key, val, section = invalid)
     'print  "Wrote " val " to " key
 end function
 
-
-
 sub showdialog()
     dialog = createObject("roSGNode", "Dialog")
     dialog.title = "Please enter some preferences"
@@ -256,13 +334,12 @@ sub showdialog()
     scene.dialog = dialog
 end sub
 
-
-'' Working with Preferences
 sub getCategoriesTask()
     m.PreferenceTask = CreateObject("roSGNode", "PreferenceTask")
     m.PreferenceTask.observeField("error", "onContentLoaded")
     m.PreferenceTask.control = "run"
 end sub
+
 sub onContentLoaded()
     if m.PreferenceTask.error = "ok"
         m.rowList.content = m.PreferenceTask.content
@@ -296,6 +373,22 @@ sub OnItemClicked()
     end if
 end sub
 
+sub ForYouFixed_btnClicked()
+    m.checkOnItemClicked = true
+    if m.checkBusySpinner = "loaded"
+        m.exampleBusyspinner.visible = true
+    end if
+    m.video.content = invalid
+    focusedIndex = m.ForYouFixed_btn.text 
+    print " foryou text : "focusedIndex
+    m.query = focusedIndex
+    if focusedIndex = "Trending"
+        fetchTrandingVideos()
+    else
+        CheckSubscriptionAndStartPlayback()
+    end if
+end sub
+
 function fetchTrandingVideos()
     m.getTrandingVideo = CreateObject("roSGNode", "getTrandingVideo")
     m.searchQuery.text = m.query
@@ -304,7 +397,6 @@ function fetchTrandingVideos()
     m.getTrandingVideo.ObserveField("error", "GettingError")
     m.getTrandingVideo.control = "run"
 end function
-
 
 sub showdialogKeyboard()
     print "show KeyBoard"
@@ -363,5 +455,4 @@ function addNewPreferences(keyText as string)
         RegWrite("defaltPreferences", formatJson(recentArr))
         getCategoriesTask()
     end if
-
 end function

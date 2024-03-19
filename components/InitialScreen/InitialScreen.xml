@@ -1,31 +1,59 @@
 <?xml version = "1.0" encoding = "utf-8" ?> 
-<component name = "InitialScreen" extends = "Group" initialFocus="exampleKeyboard">
+<component name = "InitialScreen" extends = "Group" initialFocus="ForYouFixed_btn">
   <script type="text/brightscript" uri="InitialScreen.brs" />
-    <script type="text/brightscript" uri="utils.brs" />
-    <script type="text/brightscript" uri="SubscriptionLogic.brs" />
+  <script type="text/brightscript" uri="utils.brs" />
+  <script type="text/brightscript" uri="SubscriptionLogic.brs" />
+  <script type="text/brightscript" uri="../UILogic/InitialScreenLogic.brs" />
+  <script type="text/brightscript" uri="../UILogic/ScreenStackLogic.brs" />
+  
   <interface>
-    <field id="dialog" type="node"/>
-    <field id="videosArr" type="string" onChange="videosRendered"/>
-    <field id="subscriptionDialog" type="string" onChange="checkSubscription"/>
-    <field id="signal" type="string"/>
-      <field id="content" type="node" alias="RowList.content" />
-      <field id="rowItemSelected" type="intarray" alwaysnotify="true" alias="RowList.rowItemSelected" />
-      <field id="itemSelected" type="intarray" alwaysnotify="true" alias="RowList.itemSelected" />
-      <field id="optionButtonSelected" type="intarray" alwaysnotify="true" alias="option.buttonSelected" />
+  <field id="dialog" type="node"/>
+  <field id="videosArr" type="string" onChange="videosRendered"/>
+  <field id="subscriptionDialog" type="string" onChange="checkSubscription"/>
+  <field id="signal" type="string"/>
+  <field id="content" type="node" alias="RowList.content" />
+  <field id="rowItemSelected" type="intarray" alwaysnotify="true" alias="RowList.rowItemSelected" />
+  <field id="itemSelected" type="intarray" alwaysnotify="true" alias="RowList.itemSelected" />
+  <field id="optionButtonSelected" type="intarray" alwaysnotify="true" alias="settings.buttonSelected" />
+  <field id="subscribeButtonSelected" type="intarray" alwaysnotify="true" alias="subscribe.buttonSelected" />
+  <field id="ForYouFIxede_ButtonSelected" type="intarray" alwaysnotify="true" alias="ForYouFixed_btn.buttonSelected" />
+  <field id="subscription_expired" type="String" alwaysNotify = "true"/>
 
   </interface>
   <children>
-
+    <Poster
+      id="poster_homescreen"
+      uri="pkg:/images/Homescreen.png"
+      width="1280"
+      height="720"
+      translation="[0,0]"
+    />
     <Label
         id="searchQuery"
         text="Trending"
         wrap="true"
-        width="500"
+        width="160"
         numLines="1"
-        translation="[40,60]"
+        translation="[30,110]"
         font="font:LargeBoldSystemFont"
+        horizAlign="center"
 	  />
-
+     <Video
+      id="musicvideos"
+      width="454"
+      height="642"
+      translation="[415,80]"
+      enableUi ="false"
+      enableTrickPlay ="false"
+    />
+    <!-- horizAlign = "center" -->
+    <Poster
+      id="posterRow"
+      uri="pkg:/images/rowListPoster.png"
+      width="840"
+      height="81"
+      translation="[225,-1]"
+    />
     <Label
         id="channelTitle"
         text=""
@@ -36,32 +64,38 @@
         font="font:LargeBoldSystemFont"
 	  />
 
-
-    <Video
-      id="musicvideos"
-      width="500"
-      height="720"
-      horizAlign = "center"
-      translation="[360,0]"
-      enableUi ="false"
-      enableTrickPlay ="false"
-    />
-
-        <RowList
+    <RowList
         itemComponentName="PreferencesRowListItem"
         id="rowList"
-        translation="[20,20]"
+        translation="[435,18]"
         numRows="7"
-        rowItemSize="[ [140, 40] ]"
-        rowItemSpacing="[[10,10]]"
-        itemSize="[ 1040, 50 ]"
-        rowLabelOffset="[[30,10]]"
+        rowItemSize="[ [142, 40] ]"
+        rowItemSpacing="[[4,0]]"
+        itemSize="[ 540, 47 ]"
         showRowLabel="[false]"
         drawFocusFeedback="[true]"
         rowFocusAnimationStyle="floatingFocus"
-        rowLabelColor="#0000FF"
-        showFocusFootprint="true"
+        focusBitmapUri="pkg:/images/rowList_btn.png"
+        drawFocusFeedbackOnTop="false"
     />
+
+    <Button
+        id="ForYouFixed_btn"
+        text="ForYou"
+        focusedTextColor="0xddddddff"
+        translation="[266, 19]"
+        showFocusFootprint="false"
+        textFont="font:SmallestBoldSystemFont"
+        focusedTextFont="font:SmallestBoldSystemFont"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/rowList_btn.png"
+        focusFootprintBitmapUri="pkg:/images/rowList_btn.png"
+        maxWidth="125"
+        minWidth="120"
+        height="40"
+
+      />
       <Label
       id="loading"
       text="Loading..."
@@ -77,40 +111,61 @@
 
       <BusySpinner
       id = "exampleBusySpinner"
-      visible = "true" />
+      visible = "false" />
 
-
-        <Button
-      id="option"
+      <Button
+      id="settings"
       text=""
       showFocusFootprint="true"
-      iconUri="pkg:/images/feed_back.png"
-      focusedIconUri="pkg:/images/feed_back.png"
-      translation="[1170, 10]"  
-      maxwidth="90"
-      minWidth="85"
-      height="70"
+      focusedIconUri=""
+      iconUri=""
+      focusBitmapUri="pkg:/images/setting_btn_2.png"
+      focusFootprintBitmapUri="pkg:/images/settings.png"
+      translation="[1160, 17]"
+      maxwidth="48"
+      minWidth="48"
+      height="48"
+    />
+
+     <Button
+      id="subscribe"
+      text=""
+      showFocusFootprint="true"
+      focusedIconUri=""
+      iconUri=""
+      focusBitmapUri="pkg:/images/sub_btn_2.png"
+      focusFootprintBitmapUri="pkg:/images/subscribe.png"
+      translation="[64, 17]"  
+      maxwidth="64"
+      minWidth="64"
+      height="83"
     />
 
       <Button
       id = "butonUp"
       showFocusFootprint = "true"
       text=""
-      iconUri="pkg:/images/up.png"
-      focusedIconUri="pkg:/images/up.png"
-      translation="[1170, 550 ]"  
-      maxwidth="90"
-      minWidth="90"
+      focusedIconUri=""
+      iconUri=""
+      focusBitmapUri="pkg:/images/left_focused.png"
+      focusFootprintBitmapUri="pkg:/images/left_unfocused.png"
+      translation="[73, 336 ]"  
+      maxwidth="48"
+      minWidth="48"
+      height="48"
       />
       <Button
       id = "butonDown"
       showFocusFootprint = "true"
       text=""
-      iconUri="pkg:/images/down.png"
-      focusedIconUri="pkg:/images/down.png"
-      translation="[1170,630]"
-      maxwidth="90"
-      minWidth="90"
+      focusedIconUri=""
+      iconUri=""
+      focusBitmapUri="pkg:/images/right_focused.png"
+      focusFootprintBitmapUri="pkg:/images/right_unfocused.png"
+      translation="[1159, 336 ]"  
+      maxwidth="48"
+      minWidth="48"
+      height="48"
       />
 
   </children>

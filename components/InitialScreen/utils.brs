@@ -18,7 +18,6 @@ sub playVideo(i as integer)
         m.busyspinner.visible = true
     end if
     if m.videos[i] <> invalid
-        print "Url of played Video: " m.videos[i]
         videoContent = createObject("RoSGNode", "ContentNode")
         videoContent.url = m.videos[i]
         videoContent.streamformat = "mp4"
@@ -26,47 +25,66 @@ sub playVideo(i as integer)
         m.video.control = "play"
         m.video.ObserveField("state", "OnVideoStateChange")
         if m.videosLength - 2 = i
-            'dailyFreeTrail()
-            CheckSubscriptionAndStartPlayback() 'check subscraption
+            CheckSubscriptionAndStartPlayback()
         end if
     end if
 end sub
 
 sub dailyFreeTrail()
-    'm.availiableFreeTrail = false
-    getDailyFectoryUpdate() 'every day refrash the freeTrail Registery
+    ' getDailyFactoryUpdate() 'every day refrash the freeTrail Registery
+    ' if ParseJson(RegRead("freeTrail")) <= 4
+        ' 'm.availiableFreeTrail = true
+        ' freeTrail = ParseJson(RegRead("freeTrail"))
+        ' RegWrite("freeTrail", FormatJson(freeTrail + 1))
+        ' print "No of Api Calls Api Called : " ParseJson(RegRead("freeTrail"))
+        ' if m.checkOnItemClicked = true
+        '     fetchVideos()
+        '     m.checkOnItemClicked = false
+        ' else if m.checkOnAddButtonClicked = true
+        '     getAvailiableProducts()
+        '     m.checkOnAddButtonClicked = false
+        ' else
+        '     fetchMoreVideos()
+        ' end if
 
-    if ParseJson(RegRead("freeTrail")) <= 15
-        'm.availiableFreeTrail = true
-        freeTrail = ParseJson(RegRead("freeTrail"))
-        RegWrite("freeTrail", FormatJson(freeTrail + 1))
-        print "no ofApi Call Api Called" ParseJson(RegRead("freeTrail"))
-        if m.checkOnItemClicked = true
-            fetchVideos()
-            m.checkOnItemClicked = false
-        else if m.checkOnAddButtonClicked = true
-            getAvailiableProducts()
-            m.checkOnAddButtonClicked = false
-        else
-            fetchMoreVideos()
-        end if
-    else
+        getDailyFactoryUpdate2()
+            m.a = RegRead("count_videos")
+            if m.a <> invalid
+                print "valid "
+                m.a = m.a.toInt()
+            else
+                print "Registry value not found or is invalid"
+                m.a = 0
+            end if
+            if m.a < 10
+                ' m.video.content = invalid
+                ' print " Number of Videos Played :::"m.a
+                ' 'play next video
+                ' m.a =m.a + 1
+                ' RegWrite("count_videos", FormatJson(m.a))
+                ' playVideo(m.a)
+                if m.checkOnItemClicked = true
+                    fetchVideos()
+                    m.checkOnItemClicked = false
+                else if m.checkOnAddButtonClicked = true
+                    getAvailiableProducts()
+                    m.checkOnAddButtonClicked = false
+                else
+                    fetchMoreVideos()
+                end if
+            else
         print "Limit Reached :"
         dailyLimitExpireDialog()
     end if
 end sub
 
+
 sub dailyLimitExpireDialog()
     m.exampleBusyspinner.visible = false
-    dialog = CreateObject("roSGNode", "Dialog")
-    dialog.title = "Subscription"
-    dialog.message = "Upgrade to a subscription for endless access to videos and entertainment! "
-    dialog.buttons = ["Cancel", "Buy Subscraption"]
-    dialog.observeField("buttonSelected", "DailyLimtDialogButtonSelected")
-    scene = m.top.getScene()
-    scene.dialog = dialog
+    m.video.control = "pause"
+   print "***************** daily limit reached *******************"
+   m.top.subscription_expired= "abc"
 end sub
-
 
 sub DailyLimtDialogButtonSelected(event as object)
     button = event.getData()
@@ -80,31 +98,48 @@ sub DailyLimtDialogButtonSelected(event as object)
     end if
 end sub
 
-
-
-sub getDailyFectoryUpdate()
+sub getDailyFactoryUpdate()
     rawTime = CreateObject("roDateTime")
     rawTime.ToLocalTime()
     stringedTime = rawTime.ToISOString()
-    print "Current Timae is: " stringedTime
+    print "Current Time is: " + stringedTime
     arr = stringedTime.split("-")
-    conste = arr[2]
-    time = conste.split("T")
-    m.currentDate = time[0].toInt()
-    print "print "m.currentDate
-
-    RegRead("previusDate")
-    if m.preferencesExists = false
+    currentDate = arr[2].toInt()
+    print "Date: " + currentDate.ToStr()
+    previusDate = RegRead("previusDate")
+    if previusDate = invalid
         RegWrite("previusDate", FormatJson(1))
         RegWrite("freeTrail", FormatJson(1))
-        print "one time when channel Download"
+        print "One time when channel was downloaded"
     else
-        previusDate = ParseJson(RegRead("previusDate"))
-        if m.currentDate <> previusDate
-            previusDate = m.currentDate
-            RegWrite("previusDate", FormatJson(previusDate))
+        previusDate = ParseJson(previusDate)
+        if currentDate <> previusDate
+            RegWrite("previusDate", FormatJson(currentDate))
             print "One Time a Day"
             RegWrite("freeTrail", FormatJson(2))
+        end if
+    end if
+end sub
+
+sub getDailyFactoryUpdate2()
+    rawTime = CreateObject("roDateTime")
+    rawTime.ToLocalTime()
+    stringedTime = rawTime.ToISOString()
+    print "Current Time is: " + stringedTime
+    arr = stringedTime.split("-")
+    currentDate = arr[2].toInt()
+    print "Date: " + currentDate.ToStr()
+    previusDate = RegRead("previusDate")
+    if previusDate = invalid
+        RegWrite("previusDate", FormatJson(1))
+        RegWrite("count_videos", FormatJson(1))
+        print "One time when channel was downloaded"
+    else
+        previusDate = ParseJson(previusDate)
+        if currentDate <> previusDate
+            RegWrite("previusDate", FormatJson(currentDate))
+            print "One Time a Day"
+            RegWrite("count_videos", FormatJson(2))
         end if
     end if
 end sub
@@ -112,7 +147,7 @@ end sub
 function OnVideoStateChange()
     if m.video.state = "finished"
         if m.i = m.videos.Count() - 1
-            m.butonDown.visible = false
+            m.butonDown.visible = true
         else
             m.butonDown.visible = true
             m.i++
@@ -123,13 +158,10 @@ function OnVideoStateChange()
         print "playing Video"
         m.busyspinner.visible = false
     end if
-
     if(m.video.state = "error")
         reloadAgain()
     end if
 end function
-
-
 
 function fetchMoreVideos()
     if m.checkBusySpinner = "loaded"

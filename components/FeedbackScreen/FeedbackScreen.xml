@@ -1,5 +1,5 @@
 <?xml version = "1.0" encoding = "utf-8" ?> 
-<component name = "FeedbackScreen" extends = "Group" initialFocus="backBtn">
+<component name = "FeedbackScreen" extends = "Group" >
   <interface>
     <field id="goBackBtn" alwaysnotify="true" alias="backBtn.buttonSelected" />
   </interface>
@@ -26,8 +26,8 @@
       <!-- Button to go to video screen -->
       <Button
         id="backBtn"
-        text="Return to videos"
-        translation="[555, 645]"
+        text="Press TO Move Back"
+        translation="[545, 645]"
         showFocusFootprint="true"
         focusedIconUri=""
         iconUri=""

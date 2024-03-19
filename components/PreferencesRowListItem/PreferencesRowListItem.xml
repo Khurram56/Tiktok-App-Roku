@@ -2,20 +2,19 @@
 
 <component name="PreferencesRowListItem" extends="Group" >
     <interface>
-      <field id="itemContent" type="node" onChange="OnContentSet" />
+        <field id="itemContent" type="node" onChange="OnContentSet" />
     </interface>
     <script type="text/brightscript" uri="PreferencesRowListItem.brs" />
     <children>
 
-        <ScrollingLabel 
-            id = "title" 
-            maxWidth = "140" 
+        <ScrollingLabel
+            id = "title"
+            maxWidth = "102"
             height = "40"
             horizAlign = "center"
             vertAlign = "center"
-            font = "font:MediumBoldSystemFont" 
+            font = "font:SmallestBoldSystemFont"
             text=""
-            
         />
 
     </children>

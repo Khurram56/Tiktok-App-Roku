@@ -9,8 +9,8 @@ sub getContent()
     print "Returned preferences: " m.top.preferences
     file = ReadAsciiFile("tmp:/videos.txt")
     offset = ReadAsciiFile("tmp:/offset.txt")
-    print "Here: " m.top.changes
-    print "Prefences: " m.top.preferences
+    ' print "Here: " m.top.changes
+    ' print "Prefences: " m.top.preferences
     if m.top.changes = "true"
         print "Add more Videos"
         if file <> ""
@@ -31,9 +31,9 @@ sub getContent()
     'print  "Offset Type: " + Type(offset)
     offset = offset.toStr()
     if countryCode <> "OT" and countryCode <> "ot"
-        url = "https://tiktok-scraper7.p.rapidapi.com/feed/search?keywords=" + m.top.preferences + "&region=" + countryCode + "&count=30&cursor=" + offset + "&publish_time=0&sort_type=0"
+        url = "https://tiktok-scraper7.p.rapidapi.com/feed/search?keywords=" + m.top.preferences + "&region=" + countryCode + "&count=500&cursor=" + offset + "&publish_time=0&sort_type=0"
     else
-        url = "https://tiktok-scraper7.p.rapidapi.com/feed/search?keywords=" + m.top.preferences + "&count=30&cursor=" + offset + "&publish_time=0&sort_type=0"
+        url = "https://tiktok-scraper7.p.rapidapi.com/feed/search?keywords=" + m.top.preferences + "&count=500&cursor=" + offset + "&publish_time=0&sort_type=0"
     end if
 
     print "Url: " url
@@ -43,14 +43,14 @@ sub getContent()
     'xfer.AddHeader("X-RapidAPI-Key", "486a89c811msh54ba0256b830a5ap13199cjsndf2db2fc4aa2")
     xfer.InitClientCertificates()
     rsp = xfer.GetToString()
-    print "rsp: " rsp
+    'print "rsp: " rsp
     json = ParseJson(rsp)
     if json <> invalid
         if json.data <> invalid
             json = json.data
             for each item in json.videos
                 video = item.play
-                print "Video Url: "video
+                'print "Video Url: "video
                 m.videoArr.Push(video)
             end for
             m.videoArr = FormatJson(m.videoArr)

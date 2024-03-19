@@ -1,0 +1,214 @@
+<?xml version = "1.0" encoding = "utf-8" ?> 
+<component name = "RateUsScreen" extends = "Group" initialFocus="Rate_us">
+
+<script type="text/brightscript" uri="RateUsScreen.brs" />
+<script type="text/brightscript" uri="subs_logic.brs" />
+<script type="text/brightscript" uri="../UILogic/ScreenStackLogic.brs" />
+<interface>
+    <!-- <field id="ctg_ButtonSelected" type="intarray" alwaysnotify="true" alias="Categories.buttonSelected" /> -->
+    <!-- <field id="settingsButtonSelected" type="intarray" alwaysnotify="true" alias="feedback.buttonSelected" /> -->
+    <field id="rateUsButtonSelected" type="intarray" alwaysnotify="true" alias="Rate_us.buttonSelected" />
+    <field id="ctg_ButtonSelected" type="string"/>
+    <!-- <field id="dialog" type="node" /> -->
+</interface>
+<children >
+<Group>
+
+ <Poster
+        id="poster2222"
+        width="1200"
+        height="800"
+        translation="[0, 0]"
+        uri="pkg:/images/Homescreen.png"
+      />
+
+<Poster
+id="poster"
+width="905"
+height="444"
+translation="[188, 35]"
+uri="pkg:/images/Rectangle.png"
+/>
+
+<Poster
+        id="qrcode"
+        width="280.5"
+        height="280.5"
+        translation="[500.5, 117]"
+        uri="pkg:/images/qrcode.png"
+      />
+<Poster
+        id="qrcode_bg"
+        width="332"
+        height="332"
+        translation="[475, 91]"
+        uri="pkg:/images/qrcode_bg.png"
+      />
+
+<Label 
+id="RateUstitle"
+text="Rate Our Channel"
+font="font:LargeBoldSystemFont"
+translation="[237, 65]"
+/>
+<Label 
+id="Feedbacktitle"
+text="Feedback"
+font="font:LargeBoldSystemFont"
+visible="false"
+translation="[237, 65]"
+/>
+<Label 
+id="categoriestitle"
+text="Categories"
+font="font:LargeBoldSystemFont"
+visible="false"
+translation="[237, 65]"
+/>
+
+<CheckList 
+    id="exampleCheckList"
+    translation="[320, 150]"
+    numRows="6"
+    numColumns="4" 
+    itemSpacing="[35,2]"
+    horizFocusDirection="true"
+    itemSize="[140,40]"
+    columnSpacings="[25,50]"
+    columnWidths="[150]"
+    font = "font:SmallestSystemFont" 
+    focusedFont = "font:SmallestSystemFont" 
+    focusedColor="0xddddddff"
+    checkedIconUri="pkg:/images/focus_checkbox.png"
+    uncheckedIconUri="pkg:/images/check_box.png"
+    focusedCheckedIconUri="pkg:/images/focus_checkbox1.png"
+    focusedUncheckedIconUri="pkg:/images/focus_checkbox1.png"
+    vertFocusAnimationStyle="floatingFocus"
+    drawFocusFeedback="false" />
+    
+<!-- <CheckList
+    id = "exampleCheckList"
+    translation="[320, 150]"
+    numRows="6"
+    numColumns="4" 
+    itemSpacing="[35,2]"
+    horizFocusDirection="true"
+    itemSize="[140,40]"
+    columnSpacings="[25,50]"
+    columnWidths="[150]"
+    font = "font:SmallestSystemFont" 
+    focusedFont = "font:SmallestSystemFont" 
+    focusedColor="0xddddddff"
+    checkedIconUri="pkg:/images/focus_checkbox.png"
+    uncheckedIconUri="pkg:/images/check_box.png"
+    focusedCheckedIconUri="pkg:/images/focus_checkbox.png"
+    focusedUncheckedIconUri="pkg:/images/focus_checkbox.png"
+    vertFocusAnimationStyle="floatingFocus"
+    drawFocusFeedback="false"
+    >
+    <ContentNode role = "content" >
+        <ContentNode title = "Entertainment"/>
+        <ContentNode title = "Sports"/>
+        <ContentNode title = "Food"/>
+        <ContentNode title = "Business"/>
+        <ContentNode title = "Podcast"/>
+        <ContentNode title = "Religious"/>
+        <ContentNode title = "Cartoons" />
+        <ContentNode title = "Anime"/>
+        <ContentNode title = "Games"/>
+        <ContentNode title = "Fun"/>
+        <ContentNode title = "Comedy" />
+        <ContentNode title = "Horror"/>
+        <ContentNode title = "Adventure"/>
+        <ContentNode title = "Kids"/>
+    </ContentNode>
+</CheckList> -->
+
+<Button
+id="rateUsdescription"
+showFocusFootprint="true"
+iconUri=""
+focusedIconUri=""
+focusBitmapUri="pkg:/images/desc.png"
+focusFootprintBitmapUri="pkg:/images/desc.png"
+translation="[453, 157]"  
+maxWidth="375"
+minWidth="370"
+height="60"
+/>
+
+<Button
+id="stars"
+showFocusFootprint="true"
+iconUri=""
+focusedIconUri=""
+focusBitmapUri="pkg:/images/star.png"
+focusFootprintBitmapUri="pkg:/images/star.png"
+translation="[377, 262]"  
+maxWidth="527"
+minWidth="525"
+height="105"
+/>
+
+
+
+<Button
+id="Categories_btn"
+showFocusFootprint="true"
+iconUri=""
+focusedIconUri=""
+focusBitmapUri="pkg:/images/ctg_pink_btn.png"
+focusFootprintBitmapUri="pkg:/images/ctg_grey_btn.png"
+translation="[548, 366]"  
+maxWidth="185"
+minWidth="180"
+height="64"
+/>
+
+<Button
+id="Categories"
+showFocusFootprint="true"
+iconUri=""
+focusedIconUri=""
+focusBitmapUri="pkg:/images/catg_pink_btn.png"
+focusFootprintBitmapUri="pkg:/images/catg_grey_btn.png"
+translation="[324, 504]"  
+maxWidth="191"
+minWidth="190"
+height="196"
+/>
+<Button
+id="Rate_us"
+showFocusFootprint="true"
+iconUri=""
+focusedIconUri=""
+focusBitmapUri="pkg:/images/rate3.png"
+focusFootprintBitmapUri="pkg:/images/rate2.png"
+translation="[545, 504]"  
+maxWidth="191"
+minWidth="190"
+height="196"
+/>
+<Button
+id="feedback"
+showFocusFootprint="true"
+iconUri=""
+focusedIconUri=""
+focusBitmapUri="pkg:/images/fb.png"
+focusFootprintBitmapUri="pkg:/images/fb1.png"
+translation="[766, 504]"  
+maxWidth="191"
+minWidth="190"
+height="196"
+/>
+</Group>
+<!-- <StdDlgTitleArea primaryTitle= "Buy Subscription" />
+        <StdDlgContentArea>
+            <StdDlgTextItem text="You are not a subscribed user, Buy subscribe first!" />
+        </StdDlgContentArea>
+        <StdDlgButtonArea id="buttonArea">
+            <StdDlgButton text="Cancel" />
+        </StdDlgButtonArea> -->
+</children>
+
+</component>

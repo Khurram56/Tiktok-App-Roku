@@ -22,14 +22,14 @@ sub getContent()
    ' xfer.AddHeader("X-RapidAPI-Key", "486a89c811msh54ba0256b830a5ap13199cjsndf2db2fc4aa2")
     xfer.InitClientCertificates()
     rsp = xfer.GetToString()
-    print "rsp: " rsp
+    'print "rsp: " rsp
     json = ParseJson(rsp)
     if json <> invalid
         if json.data <> invalid
             json = json.data
             for each item in json
                 video = item.play
-                print "Video Url: "video
+                'print "Video Url: "video
                 m.videoArr.Push(video)
             end for
             m.videoArr = FormatJson(m.videoArr)

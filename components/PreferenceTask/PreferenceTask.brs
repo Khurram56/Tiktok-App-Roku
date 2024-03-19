@@ -4,7 +4,7 @@ end sub
 
 sub getContent()
     data = RegRead("defaltPreferences")
-    'data = ReadAsciiFile("tmp:/prefer.txt")
+    print "date: "; data
     if data <> invalid
         json = ParseJson(data)
         print json
@@ -12,13 +12,18 @@ sub getContent()
         row = {}
         row.children = []
         rowItem =0
-        for each channel in json
-            itemChannel = {}
-            itemChannel.name = channel.name
-            row.children.Push(itemChannel)
+        for each item in json
+            'for i = 0 to checkListArray.Count() - 1
+                itemChannel = {}
+                'item = checkListArray[i] 
+                if item.checked=true                    
+                    itemChannel.name = item.title    
+                    row.children.Push(itemChannel)   
+                end if
+            'end for
             rootChildrenChannels.Push(row)
-            if rowItem = json.Count()-1
-                rootChildrenChannels.Push(row)
+            if rowItem = json.Count()-1                 
+                rootChildrenChannels.Push(row)          
                 row = {}
                 row.children = []
                 rowItem = -1
@@ -47,4 +52,4 @@ function RegRead(key, section = invalid)
         return invalid
     end if
     return invalid
-    end function
+end function

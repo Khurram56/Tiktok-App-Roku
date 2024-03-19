@@ -1,0 +1,667 @@
+<?xml version = "1.0" encoding = "utf-8" ?> 
+<component name = "subscription" extends = "Group" initialFocus="book_now1">
+  <!-- <interface>
+    <field id="goBackBtn" alwaysnotify="true" alias="backBtn.buttonSelected" />
+  </interface> -->
+  <script type="text/brightscript" uri="../UILogic/ScreenStackLogic.brs" />
+  <script type="text/brightscript" uri="subscription.brs" />
+   <script type="text/brightscript" uri="sub_Logic.brs" />
+  <!-- <script type="text/brightscript" uri="../InitialScreen/SubscriptionLogic.brs" /> -->
+  <children >
+    <Group>
+
+      
+
+      <!-- Poster for a image in centered -->
+       <Poster
+        id="poster222"
+        width="1200"
+        height="800"
+        translation="[0, 0]"
+        uri="pkg:/images/Homescreen.png"
+      />
+      <Poster
+        id="poster"
+        width="1000"
+        height="600"
+        translation="[151, 60]"
+        uri="pkg:/images/back_poster.png"
+      />
+       <Label 
+        id="title"
+        text="Subscription Packages"
+        font="font:LargeBoldSystemFont"
+        translation="[470, 90]"
+      />
+       
+       <Poster
+        id="poster1"
+        width="268"
+        height="429"
+        translation="[210, 150]"
+        uri="pkg:/images/rectangle_subscription.png"
+      />
+
+      <Poster
+        id="poster2"
+        width="268"
+        height="85"
+        translation="[210, 150]"
+        uri="pkg:/images/short_rec.png"
+      />
+      <Label 
+        id="basic"
+        text="Freemium"
+        
+        font="font:LargeBoldSystemFont"
+        translation="[270, 180]"
+      />
+
+      <!-- Button to go to video screen -->
+      <!-- <Button
+        id="book_now"
+        text="Buy Now"
+        translation="[270, 518]"
+        showFocusFootprint="true"
+        textFont="font:SmallBoldSystemFont"
+        focusedTextFont="font:SmallBoldSystemFont"
+        focusedTextColor="0xDA0D4E"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/standard_btn.png"
+        focusFootprintBitmapUri="pkg:/images/btn.png"
+
+        maxWidth="150"
+        minWidth="145"
+        height="40"
+
+      /> -->
+      <Label 
+        id="dollar_prm"
+        text="0.00"
+        font="font:LargeBoldSystemFont"
+        translation="[293, 265]"
+      />
+      <Label 
+        id="time"
+        text="per day"
+        font="font:SmallestSystemFont"
+        translation="[361, 272]"
+        width="100"
+        height="14"
+      />
+
+      <!-- <Button
+        id="dollar_prm"
+        text=""
+        translation="[290, 255]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/basic.png"
+        focusFootprintBitmapUri="pkg:/images/basic.png"
+        maxWidth="94"
+        minWidth="92"
+        height="39"
+
+      /> -->
+
+
+      
+      <Button
+        id="check11"
+        text=""
+        translation="[225, 310]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/check.png"
+        focusFootprintBitmapUri="pkg:/images/check.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+      />
+      <Button
+        id="cross11"
+        text=""
+        translation="[225, 346]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/check.png"
+        focusFootprintBitmapUri="pkg:/images/check.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+      />
+      
+      <Button
+        id="cross12"
+        text=""
+        translation="[225, 402]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/cross.png"
+        focusFootprintBitmapUri="pkg:/images/cross.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+
+      />
+      <!-- <Button
+        id="cross13"
+        text=""
+        translation="[225, 437]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/cross.png"
+        focusFootprintBitmapUri="pkg:/images/cross.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+
+      /> -->
+        
+
+
+       <Label 
+        id="text1_bsc"
+        text="10 videos per day"
+        font="font:SmallestSystemFont"
+        translation="[263, 312]"
+        numLines="2"
+        lineSpacing="1"
+        width="230"
+        height="0"
+        wrap="true"
+      
+      />
+       <!-- color = "0xDA0E4E" -->
+
+
+       <Label 
+        id="text2_bsc"
+        text="5 free categories will Display"
+        font="font:SmallestSystemFont"
+        translation="[263, 350]"
+        numLines="2"
+        lineSpacing="1"
+        width="200"
+        height="0"
+        wrap="true"
+      
+      />
+      <Label 
+        id="text3_bsc"
+        text="unable to add new categories"
+        font="font:SmallestSystemFont"
+        translation="[263, 405]"
+        numLines="2"
+        lineSpacing="1"
+        width="200"
+        height="0"
+        wrap="true"
+      
+      />
+      <!-- <Label 
+        id="text4_bsc"
+        text="Lorem Ipsum is simply dummy text"
+        font="font:SmallestSystemFont"
+        translation="[263, 440]"
+        numLines="2"
+        lineSpacing="1"
+        width="200"
+        height="0"
+        wrap="true"
+      
+      /> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <Poster
+        id="poster3"
+        width="268"
+        height="429"
+        translation="[515, 150]"
+        uri="pkg:/images/stndard_back.png"
+      />
+   <!-- <Poster
+        id="poster4"
+        width="1000"
+        height="85"
+        translation="[0, 660]"
+        uri="pkg:/images/sub_down.png"
+      /> -->
+      <Poster
+        id="poster4"
+        width="268"
+        height="85"
+        translation="[515, 150]"
+        uri="pkg:/images/stndard_up.png"
+      />
+      <Label 
+        id="Standard"
+        text="Basic"
+        color = "0xDA0E4E"
+        font="font:LargeBoldSystemFont"
+        translation="[605, 180]"
+      />
+      <Label 
+        id="time"
+        text="per month"
+        font="font:SmallestSystemFont"
+        translation="[666, 272]"
+        width="100"
+        height="14"
+      />
+       <Label 
+        id="basic_cost"
+        text=""
+        font="font:LargeBoldSystemFont"
+        translation="[580, 265]"
+      />
+      <Label 
+        id="text1_standard"
+        text="500 Videos per day"
+        font="font:SmallestSystemFont"
+        translation="[560, 312]"
+        numLines="2"
+        lineSpacing="1"
+        width="230"
+        height="0"
+        wrap="true"
+      
+      />
+       <!-- color = "0xDA0E4E" -->
+
+
+       <Label 
+        id="text2_standard"
+        text="Valid for one month"
+        font="font:SmallestSystemFont"
+        translation="[560, 350]"
+        numLines="2"
+        lineSpacing="1"
+        width="200"
+        height="0"
+        wrap="true"
+      
+      />
+      <Label 
+        id="text3_standard"
+        text="Able to add 10 new categories"
+        font="font:SmallestSystemFont"
+        translation="[560, 385]"
+        numLines="2"
+        lineSpacing="1"
+        width="200"
+        height="0"
+        wrap="true"
+      
+      />
+      <Label 
+        id="text4_standard"
+        text="Don't have unlimited access"
+        font="font:SmallestSystemFont"
+        translation="[560, 430]"
+        numLines="2"
+        lineSpacing="1"
+        width="200"
+        height="0"
+        wrap="true"
+      
+      />
+      <!-- <Label 
+        id="text5_standard"
+        text="Lorem Ipsum is simply dummy text"
+        font="font:SmallestSystemFont"
+        translation="[560, 470]"
+        numLines="2"
+        lineSpacing="1"
+        width="200"
+        height="0"
+        wrap="true"
+      
+      /> -->
+
+      <!-- Button to go to video screen -->
+      <Button
+        id="book_now1"
+        text="Buy Now"
+        textColor = "0xDA0D4E"
+        translation="[580, 510]"
+        showFocusFootprint="true"
+        textFont="font:SmallBoldSystemFont"
+        focusedTextFont="font:SmallBoldSystemFont"
+        focusedTextColor="0xDA0D4E"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/standard_btn.png"
+        focusFootprintBitmapUri="pkg:/images/standard_btn.png"
+        maxWidth="150"
+        minWidth="145"
+        height="45"
+
+      />
+        <Button
+        id="cross"
+        text=""
+        translation="[527, 428]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/cross.png"
+        focusFootprintBitmapUri="pkg:/images/cross.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+
+      />
+      <!-- <Button
+        id="cross1"
+        text=""
+        translation="[527, 467]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/cross.png"
+        focusFootprintBitmapUri="pkg:/images/cross.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+
+      /> -->
+      <Button
+        id="check1"
+        text=""
+        translation="[527, 309]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/check.png"
+        focusFootprintBitmapUri="pkg:/images/check.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+
+      />
+      <Button
+        id="check2"
+        text=""
+        translation="[527, 347]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/check.png"
+        focusFootprintBitmapUri="pkg:/images/check.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+
+      />
+      <Button
+        id="check3"
+        text=""
+        translation="[527, 382]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/check.png"
+        focusFootprintBitmapUri="pkg:/images/check.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+
+      />
+      <!-- <Button
+        id="dollar"
+        text=""
+        translation="[592, 255]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/12.png"
+        focusFootprintBitmapUri="pkg:/images/12.png"
+        maxWidth="94"
+        minWidth="92"
+        height="39"
+
+      /> -->
+
+
+
+
+
+
+
+
+
+      
+      <Poster
+        id="poster5"
+        width="268"
+        height="429"
+        translation="[820, 150]"
+        uri="pkg:/images/rectangle_subscription.png"
+      />
+
+      <Poster
+        id="poster6"
+        width="268"
+        height="85"
+        translation="[820, 150]"
+        uri="pkg:/images/short_rec.png"
+      />
+      <Label 
+        id="Premium"
+        text="Premium"
+        font="font:LargeBoldSystemFont"
+        translation="[890, 180]"
+      />
+
+
+      <Button
+        id="book_now2"
+        text="Buy Now"
+        translation="[885, 510]"
+        textFont="font:SmallBoldSystemFont"
+        focusedTextFont="font:SmallBoldSystemFont"
+        focusedTextColor="0xDA0D4E"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/btn.png"
+        focusFootprintBitmapUri="pkg:/images/btn.png"
+        maxWidth="150"
+        minWidth="145"
+        height="40"
+
+      />
+      <!-- <Button
+        id="dollar_prm"
+        text=""
+        translation="[874, 255]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/premium.png"
+        focusFootprintBitmapUri="pkg:/images/premium.png"
+        maxWidth="94"
+        minWidth="92"
+        height="39"
+
+      /> -->
+        <Label 
+        id="time"
+        text="per year"
+        font="font:SmallestSystemFont"
+        translation="[976, 272]"
+        width="100"
+        height="14"
+      />
+      <Label 
+        id="premium_cost"
+        text=""
+        font="font:LargeBoldSystemFont"
+        translation="[874, 265]"
+      />
+
+
+       <Label 
+        id="text1_pre"
+        text="500 Vidoes per day"
+        font="font:SmallestSystemFont"
+        translation="[865, 312]"
+        numLines="2"
+        lineSpacing="1"
+        width="230"
+        height="0"
+        wrap="true"
+      
+      />
+       <!-- color = "0xDA0E4E" -->
+
+
+       <Label 
+        id="text2_pre"
+        text="Valid for one year"
+        font="font:SmallestSystemFont"
+        translation="[865, 350]"
+        numLines="2"
+        lineSpacing="1"
+        width="200"
+        height="0"
+        wrap="true"
+      
+      />
+      <Label 
+        id="text3_pre"
+        text="Able to add 10 new categories"
+        font="font:SmallestSystemFont"
+        translation="[865, 385]"
+        numLines="2"
+        lineSpacing="1"
+        width="200"
+        height="0"
+        wrap="true"
+      
+      />
+      <Label 
+        id="text4_pre"
+        text="Unlimeted access"
+        font="font:SmallestSystemFont"
+        translation="[865, 435]"
+        numLines="2"
+        lineSpacing="1"
+        width="200"
+        height="0"
+        wrap="true"
+      
+      />
+      <!-- <Label 
+        id="text5_pre"
+        text="Lorem Ipsum is simply dummy text"
+        font="font:SmallestSystemFont"
+        translation="[865, 470]"
+        numLines="2"
+        lineSpacing="1"
+        width="200"
+        height="0"
+        wrap="true"
+      
+      /> -->
+       <Button
+        id="check_p1"
+        text=""
+        translation="[830, 311]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/check.png"
+        focusFootprintBitmapUri="pkg:/images/check.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+
+      />
+       <Button
+        id="check_p2"
+        text=""
+        translation="[830, 347]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/check.png"
+        focusFootprintBitmapUri="pkg:/images/check.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+
+      />
+       <Button
+        id="check_p3"
+        text=""
+        translation="[830, 382]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/check.png"
+        focusFootprintBitmapUri="pkg:/images/check.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+
+      />
+       <Button
+        id="check_p4"
+        text=""
+        translation="[830, 431]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/check.png"
+        focusFootprintBitmapUri="pkg:/images/check.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+
+      />
+       <!-- <Button
+        id="check_p5"
+        text=""
+        translation="[830, 467]"
+        showFocusFootprint="true"
+        focusedIconUri=""
+        iconUri=""
+        focusBitmapUri="pkg:/images/check.png"
+        focusFootprintBitmapUri="pkg:/images/check.png"
+        maxWidth="24"
+        minWidth="22"
+        height="24"
+
+      /> -->
+
+    </Group>
+
+  </children>
+
+</component>

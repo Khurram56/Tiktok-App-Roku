@@ -1,0 +1,8 @@
+<?xml version = "1.0" encoding = "utf-8" ?> 
+<component name = "RateUsTask" extends = "Task">
+
+<script type="text/brightscript" uri="RateUsTask.brs" />
+<interface>
+    <field id="rateUsButtonSelected" type="string" />
+</interface>
+</component>
